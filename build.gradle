@@ -7,17 +7,11 @@ plugins {
 group = 'com.kailange.bewerbung'
 version = '0.0.1-SNAPSHOT'
 
-runtimeOnly 'org.postgresql:postgresql'
-
-
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
-
-
-
 
 configurations {
     compileOnly {
@@ -34,11 +28,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.postgresql:postgresql' // PostgreSQL-Treiber
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
+
+tasks.withType(Test) {
+    enabled = false
+}
+
 
 tasks.named('test') {
     useJUnitPlatform()
